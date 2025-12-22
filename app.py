@@ -6,103 +6,103 @@ from backend import AutomobileRAG
 # --- PAGE CONFIG ---
 st.set_page_config(
     page_title="MechanicMind AI",
+    page_icon="🏎️",
     layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# --- GEMINI-INSPIRED CSS ---
+# --- VIBRANT & INTERACTIVE CSS ---
 st.markdown("""
     <style>
-    /* Global Styles */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
     
     html, body, [data-testid="stAppViewContainer"] {
-        font-family: 'Inter', sans-serif;
-        background-color: #ffffff;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background: #ffffff;
     }
 
-    /* Minimalist Header */
-    .gemini-header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: 15px 30px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        z-index: 99;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    /* Animated Gradient Header */
+    .main-header {
+        background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+        background-size: 400% 400%;
+        animation: gradient 15s ease infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-size: 32px;
+        font-weight: 800;
+        text-align: center;
+        padding: 20px 0;
     }
 
-    /* Floating Bubble / Toggle Button */
-    .bubble-btn {
-        background: #f0f4f9;
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: background 0.3s;
-    }
-    .bubble-btn:hover { background: #e2e7ef; }
-
-    /* Chat Area Centering */
-    .main-chat-container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding-top: 80px;
-        padding-bottom: 150px;
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
-    /* Italic Placeholder Logic */
-    input::placeholder {
-        font-style: italic;
-        color: #757575 !important;
-    }
-    input { font-style: normal !important; }
-
-    /* User Message Bubble */
-    .user-msg {
-        background-color: #f0f4f9;
-        padding: 12px 20px;
-        border-radius: 20px;
-        display: inline-block;
+    /* Modern Chat Bubble: User */
+    .user-bubble {
+        background: #f0f2f6;
+        color: #1f2937;
+        padding: 15px 20px;
+        border-radius: 25px 25px 5px 25px;
         margin: 10px 0;
-        max-width: 85%;
+        max-width: 80%;
         float: right;
         clear: both;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+        border: 1px solid #e5e7eb;
     }
 
-    /* Assistant Message (No Bubble, just text) */
-    .assistant-msg {
-        padding: 20px 0;
-        margin: 10px 0;
+    /* Modern Chat Bubble: Assistant */
+    .assistant-card {
+        background: #ffffff;
+        padding: 20px;
+        border-radius: 15px;
+        margin: 15px 0;
         max-width: 100%;
         float: left;
         clear: both;
+        border-left: 5px solid #3b82f6;
+        box-shadow: 5px 5px 15px rgba(0,0,0,0.03);
     }
 
-    /* Fixed Bottom Input */
+    /* Interactive Input Box */
     [data-testid="stChatInput"] {
-        max-width: 800px !important;
-        margin: 0 auto !important;
-        bottom: 30px !important;
-        background-color: #f0f4f9 !important;
-        border-radius: 28px !important;
-        border: none !important;
-        padding: 5px !important;
+        border: 2px solid transparent !important;
+        background-image: linear-gradient(white, white), linear-gradient(to right, #3b82f6, #8b5cf6) !important;
+        background-origin: border-box !important;
+        background-clip: padding-box, border-box !important;
+        border-radius: 30px !important;
     }
 
-    /* Hide default streamlit elements for cleaner look */
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
+    /* Italic Placeholder Placeholder */
+    input::placeholder {
+        font-style: italic;
+        background: linear-gradient(to right, #6b7280, #9ca3af);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    input { font-style: normal !important; color: #1f2937 !important; }
+
+    /* Custom Sidebar styling */
+    [data-testid="stSidebar"] {
+        background-color: #f8fafc !important;
+    }
+    
+    .stButton>button {
+        border-radius: 20px !important;
+        transition: all 0.3s ease;
+    }
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+    }
     </style>
     """, unsafe_allow_html=True)
+
+# --- HEADER ---
+st.markdown('<div class="main-header">MechanicMind AI</div>', unsafe_allow_html=True)
 
 # --- INITIALIZATION ---
 if "rag_engine" not in st.session_state:
@@ -111,21 +111,13 @@ if "rag_engine" not in st.session_state:
     st.session_state.indexed_files = set()
     st.session_state.vectorstore_ready = False
 
-# --- CUSTOM HEADER ---
-st.markdown("""
-    <div class="gemini-header">
-        <div style="font-weight: 600; font-size: 20px; color: #444746;">MechanicMind AI</div>
-        <div style="color: #444746; font-size: 14px;">Workshop Assistant</div>
-    </div>
-""", unsafe_allow_html=True)
-
-# --- WORKSHOP CONSOLE (Sidebar) ---
+# --- SIDEBAR (WORKSHOP CONSOLE) ---
 with st.sidebar:
-    st.title("🛠️ Workshop Console")
-    st.caption("Upload manuals to provide context for the AI.")
+    st.markdown("### 🛠️ **Workshop Console**")
+    st.write("Feed the AI with vehicle manuals.")
     
     uploaded_files = st.file_uploader(
-        "Upload Manuals (PDF)", 
+        "Drop Service Manuals Here", 
         type="pdf", 
         accept_multiple_files=True
     )
@@ -133,7 +125,7 @@ with st.sidebar:
     if uploaded_files:
         for uploaded_file in uploaded_files:
             if uploaded_file.name not in st.session_state.indexed_files:
-                with st.status(f"Indexing {uploaded_file.name}...", expanded=False) as status:
+                with st.status(f"🛠️ Indexing {uploaded_file.name}...", expanded=False) as status:
                     with tempfile.NamedTemporaryFile(delete=False) as tmp:
                         tmp.write(uploaded_file.getvalue())
                         path = tmp.name
@@ -141,48 +133,45 @@ with st.sidebar:
                     st.session_state.rag_engine.process_document(path)
                     st.session_state.indexed_files.add(uploaded_file.name)
                     st.session_state.vectorstore_ready = True 
-                    status.update(label=f"{uploaded_file.name} Added", state="complete")
+                    status.update(label=f"✅ {uploaded_file.name} Synced", state="complete")
                     os.remove(path)
     
-    if st.button("Reset Memory", use_container_width=True):
+    st.divider()
+    if st.button("🗑️ Clear Workshop History", use_container_width=True):
         st.session_state.chat_history = []
         st.session_state.indexed_files = set()
         st.session_state.vectorstore_ready = False
         st.session_state.rag_engine = AutomobileRAG()
         st.rerun()
 
-# --- MAIN CHAT LAYOUT ---
-st.markdown('<div class="main-chat-container">', unsafe_allow_html=True)
+# --- CHAT DISPLAY ---
+chat_container = st.container()
 
-# Display Chat History
-for message in st.session_state.chat_history:
-    if message["role"] == "user":
-        st.markdown(f'<div class="user-msg">{message["content"]}</div>', unsafe_allow_html=True)
-    else:
-        st.markdown(f'<div class="assistant-msg">{message["content"]}</div>', unsafe_allow_html=True)
+with chat_container:
+    for message in st.session_state.chat_history:
+        if message["role"] == "user":
+            st.markdown(f'<div class="user-bubble">{message["content"]}</div>', unsafe_allow_html=True)
+        else:
+            st.markdown(f'<div class="assistant-card">{message["content"]}</div>', unsafe_allow_html=True)
 
-# Handle New Input
+# --- INPUT AREA ---
 if prompt := st.chat_input("Ask a technical question..."):
     if not st.session_state.get("vectorstore_ready", False):
-        st.warning("Please open the sidebar (top left arrow) and upload a manual first.")
+        st.warning("⚠️ **Workshop Offline:** Please upload a manual in the console first.")
     else:
-        # Add User Message
         st.session_state.chat_history.append({"role": "user", "content": prompt})
-        st.markdown(f'<div class="user-msg">{prompt}</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="user-bubble">{prompt}</div>', unsafe_allow_html=True)
 
-        # Assistant Response
-        with st.chat_message("assistant", avatar=None): # Hidden avatar for Gemini look
-            with st.spinner("Thinking..."):
+        with st.chat_message("assistant", avatar="🏎️"):
+            with st.spinner("🔧 Analyzing specifications..."):
                 response = st.session_state.rag_engine.get_response(prompt)
                 answer = response["answer"]
-                st.markdown(f'<div class="assistant-msg">{answer}</div>', unsafe_allow_html=True)
+                st.markdown(f'<div class="assistant-card">{answer}</div>', unsafe_allow_html=True)
                 
-                with st.expander("Sources"):
+                with st.expander("🔍 Inspection Records (Sources)"):
                     for doc in response.get("source_documents", []):
-                        st.caption(f"Page {doc.metadata.get('page', 0) + 1}")
-                        st.info(doc.page_content[:200] + "...")
+                        st.caption(f"📍 Page {doc.metadata.get('page', 0) + 1}")
+                        st.info(doc.page_content[:250] + "...")
         
         st.session_state.chat_history.append({"role": "assistant", "content": answer})
-        st.rerun() # Refresh to keep layout clean
-
-st.markdown('</div>', unsafe_allow_html=True)
+        st.rerun()
