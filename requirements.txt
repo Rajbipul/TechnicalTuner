@@ -1,5 +1,5 @@
 # Web Interface
-gunicorn
+streamlit
 
 # LangChain Core & Ecosystem
 langchain
@@ -21,3 +21,4 @@ pypdf
 # Environment & Utilities
 
 python-dotenv
+
