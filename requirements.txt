@@ -1,0 +1,22 @@
+# Web Interface
+streamlit
+
+# LangChain Core & Ecosystem
+langchain
+langchain-community
+langchain-text-splitters
+
+# Integration Packages (Updated for 2025)
+langchain-huggingface
+langchain-google-genai
+google-genai
+
+# Vector Database & Search
+faiss-cpu
+sentence-transformers
+
+# Document Processing
+pypdf
+
+# Environment & Utilities
+python-dotenv
