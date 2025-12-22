@@ -4,7 +4,7 @@
 
 ### 🚀 Application Access
 
-**[Launch the Interactive App](https://rag-powered-assistant.streamlit.app/)** *(Note: Valid API credentials may be required for full functionality)*.
+**[Launch the Interactive App](https://mechanicmindai.streamlit.app)** *(Note: Valid API credentials may be required for full functionality)*.
 
 ---
 
