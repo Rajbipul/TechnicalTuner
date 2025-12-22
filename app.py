@@ -40,14 +40,13 @@ st.markdown("""
         100% { background-position: 0% 50%; }
     }
 
-    /* 2. UNIVERSAL BLACK TEXT FIX */
-    /* Targets chat bubbles, markdown, labels, and sidebar text */
+    /* 2. UNIVERSAL BLACK TEXT FIX FOR CHAT */
     .user-bubble, .assistant-card, .stMarkdown p, .stMarkdown h1, 
-    .stMarkdown h2, .stMarkdown h3, label, .stCaption, .stExpander p {
+    .stMarkdown h2, .stMarkdown h3, .stCaption, .stExpander p {
         color: #000000 !important;
     }
 
-    /* 3. User Message: Light Gradient Bubble with Black Text */
+    /* 3. User Message: Light Gradient Bubble */
     .user-bubble {
         background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
         padding: 14px 22px;
@@ -60,7 +59,7 @@ st.markdown("""
         font-weight: 500;
     }
 
-    /* 4. Assistant Card: White with Gradient Border and Black Text */
+    /* 4. Assistant Card */
     .assistant-card {
         background: #ffffff;
         padding: 22px;
@@ -75,36 +74,57 @@ st.markdown("""
         line-height: 1.6;
     }
 
-    /* 5. WORKSHOP CONSOLE: Grey Sidebar with Black Text */
+    /* 5. WORKSHOP CONSOLE: Grey Sidebar & Black Text */
     [data-testid="stSidebar"] {
         background-color: #f2f2f2 !important; 
         border-right: 1px solid #d1d1d1;
     }
     
-    /* Ensure all sidebar elements are visible */
-    [data-testid="stSidebar"] .stMarkdown p, 
-    [data-testid="stSidebar"] .stMarkdown h3,
+    /* TARGET: Manual loading tab text (MB and filenames) to be BLACK */
+    [data-testid="stSidebar"] *, 
+    [data-testid="stFileUploadDropzone"] div, 
+    [data-testid="stFileUploadDropzone"] span,
+    [data-testid="stSidebar"] .stMarkdown p,
     [data-testid="stSidebar"] label {
         color: #000000 !important;
     }
 
-    /* 6. Gradient Input Bar with Black Input Text */
+    /* 6. RESET BUTTON: Change size on hover, keep color same */
+    div.stButton > button {
+        background-color: #333333 !important;
+        color: white !important;
+        border-radius: 25px !important;
+        transition: transform 0.3s ease-in-out !important;
+        border: none !important;
+    }
+    div.stButton > button:hover {
+        transform: scale(1.1) !important;
+        background-color: #333333 !important;
+        color: white !important;
+        border: none !important;
+    }
+    div.stButton > button:active {
+        background-color: #333333 !important;
+        border: none !important;
+    }
+
+    /* 7. CHAT INPUT: White text while writing */
+    [data-testid="stChatInput"] textarea {
+        color: #ffffff !important;
+    }
+    
     [data-testid="stChatInput"] {
         border-radius: 35px !important;
         border: 2px solid transparent !important;
-        background-image: linear-gradient(white, white), 
+        background-image: linear-gradient(#1a1a1a, #1a1a1a), 
                           linear-gradient(to right, #00c6ff, #bc4e9c) !important;
         background-origin: border-box !important;
         background-clip: padding-box, border-box !important;
     }
 
-    [data-testid="stChatInput"] textarea {
-        color: #000000 !important; /* Fixes text while typing */
-    }
-    
     input::placeholder {
         font-style: italic;
-        color: #555555 !important;
+        color: #aaaaaa !important;
     }
     </style>
     """, unsafe_allow_html=True)
