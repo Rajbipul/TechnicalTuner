@@ -39,7 +39,7 @@ GOOGLE_API_KEY = "your_gemini_api_key"
 HUGGINGFACEHUB_API_TOKEN = "your_huggingface_token"
 
 # Download the source code
-git clone [https://github.com/yourusername/mechanicmind-ai.git](https://github.com/yourusername/mechanicmind-ai.git)
+git clone [https://github.com/Rajbipul/TechnicalTuner.git](https://github.com/Rajbipul/TechnicalTuner.git)
 cd mechanicmind-ai
 
 # Initialize a virtual environment
