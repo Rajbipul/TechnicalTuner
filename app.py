@@ -40,12 +40,14 @@ st.markdown("""
         100% { background-position: 0% 50%; }
     }
 
-    /* 2. Chat Text: Forced to Black for Readability */
-    .user-bubble, .assistant-card, .stMarkdown p {
+    /* 2. UNIVERSAL BLACK TEXT FIX */
+    /* Targets chat bubbles, markdown, labels, and sidebar text */
+    .user-bubble, .assistant-card, .stMarkdown p, .stMarkdown h1, 
+    .stMarkdown h2, .stMarkdown h3, label, .stCaption, .stExpander p {
         color: #000000 !important;
     }
 
-    /* 3. User Message: Gradient Bubble with Black Text */
+    /* 3. User Message: Light Gradient Bubble with Black Text */
     .user-bubble {
         background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
         padding: 14px 22px;
@@ -58,7 +60,7 @@ st.markdown("""
         font-weight: 500;
     }
 
-    /* 4. Assistant Card: Clean White with Multi-color Border */
+    /* 4. Assistant Card: White with Gradient Border and Black Text */
     .assistant-card {
         background: #ffffff;
         padding: 22px;
@@ -73,19 +75,20 @@ st.markdown("""
         line-height: 1.6;
     }
 
-    /* 5. WORKSHOP CONSOLE: Grey Sidebar Theme */
+    /* 5. WORKSHOP CONSOLE: Grey Sidebar with Black Text */
     [data-testid="stSidebar"] {
-        background-color: #f2f2f2 !important; /* Solid Grey Background */
+        background-color: #f2f2f2 !important; 
         border-right: 1px solid #d1d1d1;
     }
-
-    [data-testid="stSidebar"] .stMarkdown h3, 
-    [data-testid="stSidebar"] .stMarkdown p,
+    
+    /* Ensure all sidebar elements are visible */
+    [data-testid="stSidebar"] .stMarkdown p, 
+    [data-testid="stSidebar"] .stMarkdown h3,
     [data-testid="stSidebar"] label {
-        color: #333333 !important; /* Dark Grey Text for Sidebar */
+        color: #000000 !important;
     }
 
-    /* 6. Gradient Input Bar */
+    /* 6. Gradient Input Bar with Black Input Text */
     [data-testid="stChatInput"] {
         border-radius: 35px !important;
         border: 2px solid transparent !important;
@@ -94,11 +97,14 @@ st.markdown("""
         background-origin: border-box !important;
         background-clip: padding-box, border-box !important;
     }
+
+    [data-testid="stChatInput"] textarea {
+        color: #000000 !important; /* Fixes text while typing */
+    }
     
-    /* Italic Gradient Placeholder */
     input::placeholder {
         font-style: italic;
-        color: #666666 !important;
+        color: #555555 !important;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -115,7 +121,7 @@ if "rag_engine" not in st.session_state:
 
 # --- SIDEBAR (GREY WORKSHOP CONSOLE) ---
 with st.sidebar:
-    st.markdown("### 🛠️ **Workshop Console**")
+    st.markdown("### 🛠️ Workshop Console")
     st.write("Manage your vehicle manuals and system state.")
     
     uploaded_files = st.file_uploader(
@@ -156,7 +162,7 @@ for message in st.session_state.chat_history:
 # --- INPUT AREA ---
 if prompt := st.chat_input("Ask a technical question..."):
     if not st.session_state.get("vectorstore_ready", False):
-        st.warning("⚠️ **Workshop Offline:** Please upload a manual to begin.")
+        st.warning("⚠️ Workshop Offline: Please upload a manual to begin.")
     else:
         st.session_state.chat_history.append({"role": "user", "content": prompt})
         st.markdown(f'<div class="user-bubble">{prompt}</div>', unsafe_allow_html=True)
