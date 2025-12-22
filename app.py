@@ -40,60 +40,27 @@ st.markdown("""
         100% { background-position: 0% 50%; }
     }
 
-    /* 2. UNIVERSAL BLACK TEXT FIX FOR CHAT & SIDEBAR */
-    .user-bubble, .assistant-card, .stMarkdown p, .stMarkdown h1, 
-    .stMarkdown h2, .stMarkdown h3, .stCaption, .stExpander p,
-    [data-testid="stSidebar"] p, [data-testid="stSidebar"] label {
+    /* 2. Chat Visibility (Black Text) */
+    .user-bubble, .assistant-card, .stMarkdown p {
         color: #000000 !important;
     }
 
-    /* 3. WHITE TEXT FOR BLACK BOXES (Uploader & Input) */
-    /* Target the text inside the dark file uploader dropzone */
-    [data-testid="stFileUploadDropzone"] div, 
-    [data-testid="stFileUploadDropzone"] span {
-        color: #ffffff !important;
-    }
-
-    /* Target the text while writing in the chat input */
-    [data-testid="stChatInput"] textarea {
-        color: #ffffff !important;
-    }
-
-    /* 4. User Message Bubble (Black Text on Light Gradient) */
-    .user-bubble {
-        background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
-        padding: 14px 22px;
-        border-radius: 22px 22px 4px 22px;
-        margin: 12px 0;
-        max-width: 80%;
-        float: right;
-        clear: both;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        font-weight: 500;
-    }
-
-    /* 5. Assistant Card (Black Text) */
-    .assistant-card {
-        background: #ffffff;
-        padding: 22px;
-        border-radius: 18px;
-        margin: 18px 0;
-        max-width: 100%;
-        float: left;
-        clear: both;
-        border-left: 6px solid;
-        border-image: linear-gradient(to bottom, #00c6ff, #f80759) 1;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-        line-height: 1.6;
-    }
-
-    /* 6. WORKSHOP CONSOLE: Grey Sidebar */
+    /* 3. WORKSHOP CONSOLE: Grey Sidebar & Black Text Fix */
     [data-testid="stSidebar"] {
         background-color: #f2f2f2 !important; 
         border-right: 1px solid #d1d1d1;
     }
+    
+    /* Ensure MB, Filenames, and labels in sidebar are BLACK */
+    [data-testid="stSidebar"] *, 
+    [data-testid="stFileUploadDropzone"] div, 
+    [data-testid="stFileUploadDropzone"] span,
+    [data-testid="stSidebar"] .stMarkdown p,
+    [data-testid="stSidebar"] label {
+        color: #000000 !important;
+    }
 
-    /* 7. RESET BUTTON: Hover animation (Size change only) */
+    /* 4. RESET BUTTON: Hover scale animation, color stays black */
     div.stButton > button {
         background-color: #333333 !important;
         color: white !important;
@@ -102,12 +69,16 @@ st.markdown("""
         border: none !important;
     }
     div.stButton > button:hover {
-        transform: scale(1.1) !important;
-        background-color: #333333 !important;
+        transform: scale(1.1) !important; /* Becomes larger */
+        background-color: #333333 !important; /* Color does not change */
         color: white !important;
     }
 
-    /* 8. CHAT INPUT: Dark background for white text visibility */
+    /* 5. CHAT INPUT: White text while writing */
+    [data-testid="stChatInput"] textarea {
+        color: #ffffff !important;
+    }
+    
     [data-testid="stChatInput"] {
         border-radius: 35px !important;
         border: 2px solid transparent !important;
@@ -120,6 +91,31 @@ st.markdown("""
     input::placeholder {
         font-style: italic;
         color: #aaaaaa !important;
+    }
+    
+    /* Chat bubbles for better aesthetics */
+    .user-bubble {
+        background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+        padding: 14px 22px;
+        border-radius: 22px 22px 4px 22px;
+        margin: 12px 0;
+        max-width: 80%;
+        float: right;
+        clear: both;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .assistant-card {
+        background: #ffffff;
+        padding: 22px;
+        border-radius: 18px;
+        margin: 18px 0;
+        max-width: 100%;
+        float: left;
+        clear: both;
+        border-left: 6px solid;
+        border-image: linear-gradient(to bottom, #00c6ff, #f80759) 1;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.04);
     }
     </style>
     """, unsafe_allow_html=True)
